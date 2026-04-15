@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>budget-buddy</title>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+    <script defer src="budget-builder.js"></script>
+    <link rel="stylesheet" href="../main-styles.css" />
+  </head>
+  <body>
+    <header><h1>budget-buddy</h1></header>
+    <nav>
+      <p class="p-nav">Nav:</p>
+      <a href="#create-budget">Create Budget</a>
+      <a href="#display-budget">Budget Display</a>
+      <a href="#income-calculator">Income Calculator</a>
+    </nav>
+    <main>
+      <!-- Input Area: This is where CRUD takes place. -->
+      <div id="create-budget" class="input-area">
+        <img
+          class="question-icon"
+          src="icons/question-icon.svg"
+          alt="Help Icon"
+        />
+        <div class="help-tooltip hidden">
+          Build your own Budget! <br /><br />Just simply enter your username and
+          give this budget a name to save it in our database. <br /><br />Then,
+          add the type of expense, the name of the item, and the amount.
+          <br /><br />Start building your budget to see what is possible in your
+          own plan. <br /><br />Good luck and have fun!
+        </div>
+        <h2>Input Line Item</h2>
+        <div class="group-of-inputs">
+          <div class="single-input">
+            <label for="user_name">Username:</label>
+            <input
+              type="text"
+              id="user_name"
+              name="user_name"
+              placeholder="enter username"
+              required
+            />
+          </div>
+          <div class="single-input">
+            <label for="budget_name">Budget Name:</label>
+            <input
+              type="text"
+              id="budget_name"
+              name="budget_name"
+              placeholder="enter budget name"
+              required
+            />
+          </div>
+          <br />
+          <div class="single-input">
+            <label for="type">Type:</label>
+            <select name="type" id="type">
+              <option value="Expenses" selected>- -- -Expenses- -- -</option>
+              <option value="Budgets">- -- -Budgets- -- -</option>
+              <option value="Savings">- -- -Savings- -- -</option>
+            </select>
+          </div>
+          <div class="single-input">
+            <label for="name">Name of Item:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="ex.Auto Insurance"
+            />
+          </div>
+          <div class="single-input">
+            <label for="amount">Amount:</label>
+            <input
+              type="text"
+              id="amount"
+              name="amount"
+              placeholder="ex. 400.00"
+            />
+          </div>
+        </div>
+        <div class="crud-buttons">
+          <button class="load-budget">Load My Budget</button>
+          <button class="add-item">Add Item</button>
+        </div>
+      </div>
+
+      <!-- Display Area: This will display a table and ultimate calculation area that shows budget criteria to user based on budget name. -->
+      <div id="display-budget" class="budget-display-area">
+        <h2>
+          Displaying Budget (Monthly): [<span class="budget-name"></span>]
+        </h2>
+
+        <h3>Expenses: [<span id="expenses-total"></span>]</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="expenses-category"></tbody>
+        </table>
+        <h3>Budgets: [<span id="budgets-total"></span>]</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="budgets-category"></tbody>
+        </table>
+        <h3>Savings: [<span id="savings-total"></span>]</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="savings-category"></tbody>
+        </table>
+        <h2>
+          Income Calculator (Annual)
+          <button id="income-breakdown">Calculate Income Breakdown</button>
+        </h2>
+        <div id="income-calculator">
+          <p>Net Income: <span id="net-income"></span></p>
+          <p>Medicaid: <span id="medicaid"></span></p>
+          <p>Social Security: <span id="social-security"></span></p>
+          <p>State Tax: <span id="state-tax"></span></p>
+          <p>Federal Tax: <span id="federal-tax"></span></p>
+          <p>Gross Income: <span id="gross-income"></span></p>
+          <br />
+          <p>
+            Hourly Wage Needed: [<span class="hourly-wage"></span>]<em>
+              (Assuming 40-hour work week)</em
+            >
+          </p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

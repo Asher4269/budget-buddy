@@ -1,0 +1,346 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+
+  font-family: monospace;
+}
+
+:root {
+  --primary-color: #dad7cd;
+  --secondary-color: #3a5a40;
+  --tertiary-color: #588157;
+  --accent-color: #bc6c25;
+
+  --complement-secondary: #a3b18a;
+
+  --small-font: 1.25rem;
+  --smallest-font: 0.75rem;
+  --minimal-font: 0.5rem;
+
+  --heading-font: 2.5rem;
+}
+
+body {
+  position: relative;
+
+  background-color: var(--primary-color);
+
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-areas:
+    "header"
+    "nav"
+    "main";
+  grid-template-rows: 75px auto auto;
+}
+
+header {
+  grid-area: header;
+
+  background-color: var(--secondary-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav {
+  grid-area: nav;
+
+  background-color: var(--tertiary-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 1em;
+  padding: 2%;
+}
+
+main {
+  grid-area: main;
+
+  background-color: var(--primary-color);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2em;
+
+  padding: 3%;
+}
+
+.question-icon {
+  position: absolute;
+  right: 0em;
+  width: 5%;
+  margin: 1%;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.question-icon:hover {
+  background-color: var(--tertiary-color);
+  border-radius: 100% 100% 100% 0%;
+}
+
+.help-tooltip {
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  z-index: 1000;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  font-size: var(--minimal-font);
+
+  border-radius: 15px;
+  border: solid 4px var(--secondary-color);
+  width: 25%;
+  opacity: 0.85;
+  padding: 0.5%;
+
+  transition: 1s ease;
+}
+
+.hidden {
+  opacity: 0;
+  display: none;
+}
+
+h1 {
+  color: var(--complement-secondary);
+  font-size: var(--heading-font);
+}
+
+h2 {
+  color: var(--secondary-color);
+  padding: 1%;
+  font-size: var(--small-font);
+}
+
+h3 {
+  color: var(--tertiary-color);
+  font-size: var(--small-font);
+  margin-left: 4%;
+  padding: 0.5%;
+
+  text-decoration: underline;
+}
+
+#expenses-total,
+#budgets-total,
+#savings-total {
+  color: var(--accent-color);
+}
+
+a {
+  text-decoration: none;
+  color: var(--complement-secondary);
+  border: solid 2px var(--complement-secondary);
+  border-radius: 4px;
+  padding: 1% 2%;
+  font-size: var(--small-font);
+}
+
+a:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+
+  transition: 0.8s ease;
+}
+
+.p-nav {
+  color: var(--complement-secondary);
+  margin-right: auto;
+  font-size: var(--small-font);
+}
+
+.input-area {
+  position: relative;
+
+  background-color: var(--complement-secondary);
+  width: 90%;
+  min-height: 30%;
+
+  border: solid 8px var(--secondary-color);
+  border-radius: 16px;
+}
+
+.group-of-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 1%;
+  align-items: start;
+}
+
+.single-input {
+  display: flex;
+  justify-content: end;
+  min-width: 66%;
+}
+
+.single-input label {
+  font-size: var(--small-font);
+  color: var(--tertiary-color);
+
+  font-weight: 900;
+}
+
+.single-input input {
+  color: var(--accent-color);
+  font-size: var(--smallest-font);
+  padding: 0.5%;
+
+  border: solid 4px var(--secondary-color);
+}
+
+.edit-input {
+  color: var(--accent-color);
+  font-size: var(--smallest-font);
+}
+
+.single-input select {
+  font-size: var(--smallest-font);
+  color: var(--tertiary-color);
+  border: solid 4px var(--secondary-color);
+  padding: 0.5%;
+}
+
+.crud-buttons {
+  position: absolute;
+  right: 0%;
+  bottom: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  padding: 1%;
+}
+
+button {
+  padding: 1%;
+  border-radius: 4px;
+  background-color: var(--accent-color);
+
+  border: 4px solid var(--secondary-color);
+
+  color: var(--primary-color);
+  cursor: pointer;
+
+  font-size: var(--smallest-font);
+}
+
+button:hover {
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+
+  transition: 0.5s ease;
+}
+
+.budget-display-area {
+  position: relative;
+
+  background-color: var(--complement-secondary);
+  width: 90%;
+
+  height: auto;
+
+  border: solid 8px var(--secondary-color);
+  border-radius: 16px;
+}
+
+.budget-name {
+  color: var(--accent-color);
+}
+
+table {
+  margin-left: 5%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  display: block;
+}
+
+th,
+td {
+  border: 4px solid var(--secondary-color);
+  background-color: var(--primary-color);
+  padding: 4px;
+
+  font-size: var(--smallest-font);
+}
+
+tr div {
+  display: flex;
+  align-items: center;
+}
+
+tr div button {
+  margin: 2%;
+}
+
+#income-calculator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  padding: 2%;
+  margin-left: 6%;
+  gap: 0.5em;
+}
+
+#income-calculator p {
+  font-size: var(--small-font);
+
+  justify-content: right;
+  color: var(--secondary-color);
+  font-weight: 900;
+
+  border: 4px dashed var(--secondary-color);
+
+  padding: 0.5%;
+}
+
+#income-calculator p span {
+  color: var(--accent-color);
+}
+
+.hourly-wage {
+  color: var(--accent-color);
+}
+
+/* * Small devices */
+@media (max-width: 600px) {
+  :root {
+    --small-font: 1rem;
+    --smallest-font: 0.65rem;
+    --heading-font: 2rem;
+    --minimal-font: 0.6rem;
+  }
+
+  .crud-buttons {
+    flex-wrap: column-reverse;
+  }
+}
+
+/* * Medium devices*/
+@media (min-width: 801px) and (max-width: 1024px) {
+  :root {
+    --small-font: 2rem;
+    --smallest-font: 1.25rem;
+    --heading-font: 3rem;
+    --minimal-font: 1rem;
+  }
+}
+
+/* * Large devices */
+@media (min-width: 1025px) {
+  :root {
+    --small-font: 2.5rem;
+    --smallest-font: 1.75rem;
+    --heading-font: 4rem;
+    --minimal-font: 1.25rem;
+  }
+}
