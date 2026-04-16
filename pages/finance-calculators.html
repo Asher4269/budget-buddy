@@ -12,7 +12,96 @@
       <a href="../index.html" class="back-button"
         ><img src="icons/back-icon.svg" alt="Back Icon"
       /></a>
+      <a class="fin-nav" href="#fin-mortgage-sec">Mortgage</a>
+      <a class="fin-nav" href="#fin-auto-sec">Auto</a>
+      <a class="fin-nav" href="#fin-investment-sec">Investment</a>
+      <a class="fin-nav" href="#fin-savings-sec">Savings</a>
     </nav>
-    <main></main>
+    <main>
+      <section id="fin-mortgage-sec">
+        <h2>Mortgage Calculator</h2>
+        <div class="calc-areas" id="calc-mortgage">
+          <button id="mortgage-button" class="calculate-button">
+            CALCULATE
+          </button>
+          <div id="mortgage-inputs">
+            <div class="group-of-inputs">
+              <div class="single-input">
+                <label for="mortgage-home-value">Home Value:</label>
+                <input
+                  type="text"
+                  id="mortgage-home-value"
+                  name="mortgage-home-value"
+                  placeholder="ex. 800000.00"
+                  required
+                />
+              </div>
+              <div class="single-input">
+                <label for="mortgage-down-payment">Down Payment:</label>
+                <input
+                  type="text"
+                  id="mortgage-down-payment"
+                  name="mortgage-down-payment"
+                  placeholder="ex. 20000.00"
+                  required
+                />
+              </div>
+              <div class="single-input">
+                <label for="mortgage-interest-rate">Interest Rate:</label>
+                <input
+                  type="text"
+                  id="mortgage-interest-rate"
+                  name="mortgage-interest-rate"
+                  placeholder="ex. 0.065"
+                  required
+                />
+              </div>
+              <div class="single-input">
+                <label for="mortgage-length-years">Length:</label>
+                <input
+                  type="text"
+                  id="mortgage-length-years"
+                  name="mortgage-length-years"
+                  placeholder="ex. 30"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="group-of-outputs" id="mortgage-outputs">
+            <p class="output-line">
+              Monthly Payment: [<span id="monthly-payment"></span>]
+            </p>
+            <p class="output-line">
+              Total Principal: [<span id="principal-payment"></span>]
+            </p>
+            <p class="output-line">
+              Total Interest: [<span id="interest-payment"></span>]
+            </p>
+            <p class="output-line">Total: [<span id="total-payment"></span>]</p>
+          </div>
+        </div>
+      </section>
+      <section id="fin-auto-sec">
+        <h2>Auto Loan Calculator</h2>
+        <div class="calc-areas" id="calc-auto">
+          <div id="auto-inputs">Input Section</div>
+          <div id="auto-outputs">Output Section</div>
+        </div>
+      </section>
+      <section id="fin-investment-sec">
+        <h2>Investment Calculator</h2>
+        <div class="calc-areas" id="calc-investment">
+          <div id="investment-inputs">Input Section</div>
+          <div id="investment-outputs">Output Section</div>
+        </div>
+      </section>
+      <section id="fin-savings-sec">
+        <h2>Savings Calculator</h2>
+        <div class="calc-areas" id="calc-savings">
+          <div id="savings-inputs">Input Section</div>
+          <div id="savings-outputs">Output Section</div>
+        </div>
+      </section>
+    </main>
   </body>
 </html>

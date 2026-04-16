@@ -67,7 +67,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: center;
+  align-items: start;
   gap: 2em;
 
   padding: 3%;
@@ -77,6 +77,10 @@ main {
 
 main::-webkit-scrollbar {
   display: none;
+}
+
+main section {
+  width: 100%;
 }
 
 h1 {
@@ -105,6 +109,96 @@ h3 {
 
 .back-button img {
   width: 6rem;
+}
+
+.fin-nav {
+  text-decoration: none;
+  color: var(--complement-secondary);
+  border: solid 2px var(--complement-secondary);
+  border-radius: 4px;
+  padding: 1% 2%;
+  font-size: var(--smallest-font);
+}
+
+.fin-nav:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+
+  transition: 0.8s ease;
+}
+
+.calc-areas {
+  position: relative;
+  background-color: var(--complement-secondary);
+  border: solid 4px var(--secondary-color);
+  border-radius: 12px;
+
+  display: flex;
+  justify-content: space-around;
+
+  padding: 2%;
+}
+
+.group-of-inputs {
+  display: flex;
+  flex-direction: column;
+  padding: 1%;
+  gap: 1em;
+  margin: 2%;
+}
+
+.single-input {
+  display: flex;
+  justify-content: end;
+  min-width: 110%;
+}
+
+.single-input label {
+  font-size: var(--smallest-font);
+  color: var(--tertiary-color);
+
+  font-weight: 900;
+}
+
+.single-input input {
+  color: var(--accent-color);
+  font-size: var(--smallest-font);
+  padding: 0.5%;
+
+  border: solid 4px var(--secondary-color);
+}
+
+.group-of-outputs {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  background-color: var(--primary-color);
+  justify-content: space-around;
+  min-width: 25%;
+  border-radius: 12px;
+  padding: 1%;
+  border: solid 4px var(--secondary-color);
+}
+
+.output-line {
+  color: var(--secondary-color);
+  font-size: var(--smallest-font);
+}
+
+.output-line span {
+  color: var(--accent-color);
+}
+
+.calculate-button {
+  position: absolute;
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  bottom: 0;
+  left: 0;
+  margin: 1%;
+  padding: 0.5%;
+  border-radius: 4px;
+  font-size: var(--smallest-font);
 }
 
 /* * Small devices */
