@@ -73,6 +73,7 @@ main {
   padding: 3%;
 
   overflow: auto;
+  scroll-behavior: smooth;
 }
 
 main::-webkit-scrollbar {
