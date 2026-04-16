@@ -26,7 +26,7 @@ body {
 
   background-color: var(--primary-color);
 
-  min-height: 100vh;
+  height: 100vh;
 
   display: grid;
   grid-template-areas:
@@ -59,6 +59,7 @@ nav {
 }
 
 main {
+  min-height: 0;
   grid-area: main;
 
   background-color: var(--primary-color);
@@ -70,6 +71,12 @@ main {
   gap: 2em;
 
   padding: 3%;
+
+  overflow: auto;
+}
+
+main::-webkit-scrollbar {
+  display: none;
 }
 
 h1 {
@@ -92,16 +99,24 @@ h3 {
   text-decoration: underline;
 }
 
-a {
+.back-button {
+  margin-right: auto;
+}
+
+.back-button img {
+  width: 6rem;
+}
+
+.learn-nav {
   text-decoration: none;
   color: var(--complement-secondary);
   border: solid 2px var(--complement-secondary);
   border-radius: 4px;
   padding: 1% 2%;
-  font-size: var(--small-font);
+  font-size: var(--smallest-font);
 }
 
-a:hover {
+.learn-nav:hover {
   background-color: var(--primary-color);
   color: var(--secondary-color);
 
