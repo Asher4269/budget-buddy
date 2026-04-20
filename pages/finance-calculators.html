@@ -70,23 +70,81 @@
           </div>
           <div class="group-of-outputs" id="mortgage-outputs">
             <p class="output-line">
-              Monthly Payment: [<span id="monthly-payment"></span>]
+              Monthly Payment: [<span id="mortgage-monthly-payment"></span>]
             </p>
             <p class="output-line">
-              Total Principal: [<span id="principal-payment"></span>]
+              Total Principal: [<span id="mortgage-principal-payment"></span>]
             </p>
             <p class="output-line">
-              Total Interest: [<span id="interest-payment"></span>]
+              Total Interest: [<span id="mortgage-interest-payment"></span>]
             </p>
-            <p class="output-line">Total: [<span id="total-payment"></span>]</p>
+            <p class="output-line">
+              Total: [<span id="mortgage-total-payment"></span>]
+            </p>
           </div>
         </div>
       </section>
       <section id="fin-auto-sec">
         <h2>Auto Loan Calculator</h2>
         <div class="calc-areas" id="calc-auto">
-          <div id="auto-inputs">Input Section</div>
-          <div id="auto-outputs">Output Section</div>
+          <button id="auto-button" class="calculate-button">CALCULATE</button>
+          <div id="auto-inputs">
+            <div class="group-of-inputs">
+              <div class="single-input">
+                <label for="auto-value">Auto Value:</label>
+                <input
+                  type="text"
+                  id="auto-value"
+                  name="auto-value"
+                  placeholder="ex. 20000.00"
+                  required
+                />
+              </div>
+              <div class="single-input">
+                <label for="auto-down-payment">Down Payment:</label>
+                <input
+                  type="text"
+                  id="auto-down-payment"
+                  name="auto-down-payment"
+                  placeholder="ex. 2000.00"
+                  required
+                />
+              </div>
+              <div class="single-input">
+                <label for="auto-interest-rate">Interest Rate:</label>
+                <input
+                  type="text"
+                  id="auto-interest-rate"
+                  name="auto-interest-rate"
+                  placeholder="ex. 4.0"
+                  required
+                />
+              </div>
+              <div class="single-input">
+                <label for="auto-length-years">Length:</label>
+                <input
+                  type="text"
+                  id="auto-length-years"
+                  name="auto-length-years"
+                  placeholder="ex. 3"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="group-of-outputs" id="auto-outputs">
+            <p class="output-line">
+              Monthly Payment: [<span id="auto-monthly-payment"></span>]
+            </p>
+            <p class="output-line">
+              Total Principal: [<span id="auto-principal-payment"></span>]
+            </p>
+            <p class="output-line">
+              Total Interest: [<span id="auto-interest-payment"></span>]
+            </p>
+            <p class="output-line">
+              Total: [<span id="auto-total-payment"></span>]
+            </p>
+          </div>
         </div>
       </section>
       <section id="fin-investment-sec">
