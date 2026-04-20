@@ -52,6 +52,33 @@ const auto_interest_output_span = document.querySelector(
 );
 const auto_total_output_span = document.querySelector("#auto-total-payment");
 
+//** INVESTMENT
+// Investment Inputs
+const investment_initial_input = document.querySelector("#investment-initial");
+const investment_monthly_input = document.querySelector(
+  "#investment-monthly-contribution",
+);
+const investment_interest_rate_input = document.querySelector(
+  "#investment-interest-rate",
+);
+const investment_length_input = document.querySelector(
+  "#investment-length-years",
+);
+
+// Investment Calculate Button
+const investment_calc_button = document.querySelector("#investment-button");
+
+// Investment Output Spans
+const investment_principal_output_span = document.querySelector(
+  "#investment-principal-gain",
+);
+const investment_interest_output_span = document.querySelector(
+  "#investment-interest-gain",
+);
+const investment_total_output_span = document.querySelector(
+  "#investment-total-gain",
+);
+
 // * Functions
 
 // Calculates Mortgage
@@ -130,6 +157,46 @@ function calculate_auto() {
   auto_total_output_span.textContent = format_amount(total_payment);
 }
 
+function calculate_investment() {
+  // Get values from inputs
+  const initial = stringMoney_to_float(investment_initial_input.value);
+  const monthly_contribution = stringMoney_to_float(
+    investment_monthly_input.value,
+  );
+  const annual_rate = parseFloat(investment_interest_rate_input.value) / 100;
+  const years = parseFloat(investment_length_input.value);
+
+  const monthly_rate = annual_rate / 12;
+  const n = years * 12;
+
+  // Future value of initial investment
+  const future_initial = initial * Math.pow(1 + monthly_rate, n);
+
+  // Future value of monthly contributions
+  let future_contributions = 0;
+
+  if (monthly_rate === 0) {
+    // Edge case: 0% interest
+    future_contributions = monthly_contribution * n;
+  } else {
+    future_contributions =
+      monthly_contribution *
+      ((Math.pow(1 + monthly_rate, n) - 1) / monthly_rate);
+  }
+
+  // Totals
+  const total_value = future_initial + future_contributions;
+  const total_principal = initial + monthly_contribution * n;
+  const total_interest = total_value - total_principal;
+
+  // Output (formatted)
+  investment_principal_output_span.textContent = format_amount(total_principal);
+
+  investment_interest_output_span.textContent = format_amount(total_interest);
+
+  investment_total_output_span.textContent = format_amount(total_value);
+}
+
 // * Following two functions just help me flip-flop between floats and currency so that the database doesn't accidentally receive a string
 // * and the user can read the money more easily.
 function format_amount(value_amount) {
@@ -147,3 +214,4 @@ function stringMoney_to_float(amount) {
 
 mortgage_calc_button.addEventListener("click", calculate_mortgage);
 auto_calc_button.addEventListener("click", calculate_auto);
+investment_calc_button.addEventListener("click", calculate_investment);

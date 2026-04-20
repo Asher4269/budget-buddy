@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>budget-buddy</title>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
     <link rel="stylesheet" href="main-styles.css" />
     <script defer src="main-script.js"></script>
   </head>
@@ -14,6 +18,17 @@
       <a href="pages/finance-calculators.html">Finance Calculators</a>
       <a href="pages/budget-builder.html">Budget Builder</a>
     </nav>
-    <main></main>
+    <main>
+      <h2>Personal Finance Made Free and Simple.</h2>
+      <img src="pages/icons/hero-icon.svg" alt="Hero Icon Savings" id="hero" />
+      <div id="total-users" class="total-display">
+        <h3>Total Users</h3>
+        <p id="total-users-number"></p>
+      </div>
+      <div id="total-budgets" class="total-display">
+        <h3>Total Budgets</h3>
+        <p id="total-budgets-number"></p>
+      </div>
+    </main>
   </body>
 </html>

@@ -16,7 +16,6 @@
       <a class="fin-nav" href="#fin-mortgage-sec">Mortgage</a>
       <a class="fin-nav" href="#fin-auto-sec">Auto</a>
       <a class="fin-nav" href="#fin-investment-sec">Investment</a>
-      <a class="fin-nav" href="#fin-savings-sec">Savings</a>
     </nav>
     <main>
       <section id="fin-mortgage-sec">
@@ -150,15 +149,65 @@
       <section id="fin-investment-sec">
         <h2>Investment Calculator</h2>
         <div class="calc-areas" id="calc-investment">
-          <div id="investment-inputs">Input Section</div>
-          <div id="investment-outputs">Output Section</div>
-        </div>
-      </section>
-      <section id="fin-savings-sec">
-        <h2>Savings Calculator</h2>
-        <div class="calc-areas" id="calc-savings">
-          <div id="savings-inputs">Input Section</div>
-          <div id="savings-outputs">Output Section</div>
+          <button id="investment-button" class="calculate-button">
+            CALCULATE
+          </button>
+          <div id="investment-inputs">
+            <div class="group-of-inputs">
+              <div class="single-input">
+                <label for="investment-initial">Initial Investment:</label>
+                <input
+                  type="text"
+                  id="investment-initial"
+                  name="investment-initial"
+                  placeholder="ex. 10000.00"
+                  required
+                />
+              </div>
+              <div class="single-input">
+                <label for="investment-monthly-contribution"
+                  >Monthly Contribution:</label
+                >
+                <input
+                  type="text"
+                  id="investment-monthly-contribution"
+                  name="investment-monthly-contribution"
+                  placeholder="ex. 200.00"
+                  required
+                />
+              </div>
+              <div class="single-input">
+                <label for="investment-interest-rate">Interest Rate:</label>
+                <input
+                  type="text"
+                  id="investment-interest-rate"
+                  name="investment-interest-rate"
+                  placeholder="ex. 4.0"
+                  required
+                />
+              </div>
+              <div class="single-input">
+                <label for="investment-length-years">How Long?:</label>
+                <input
+                  type="text"
+                  id="investment-length-years"
+                  name="investment-length-years"
+                  placeholder="ex. 2"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="group-of-outputs" id="investment-outputs">
+            <p class="output-line">
+              Total Principal: [<span id="investment-principal-gain"></span>]
+            </p>
+            <p class="output-line">
+              Total Interest: [<span id="investment-interest-gain"></span>]
+            </p>
+            <p class="output-line">
+              Total: [<span id="investment-total-gain"></span>]
+            </p>
+          </div>
         </div>
       </section>
     </main>
