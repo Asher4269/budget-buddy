@@ -43,6 +43,7 @@ const state_tax_span = document.querySelector("#state-tax");
 const federal_tax_span = document.querySelector("#federal-tax");
 const gross_income_span = document.querySelector("#gross-income");
 const hourly_wage_span = document.querySelector(".hourly-wage");
+const monthly_wage_span = document.querySelector("#monthly-wage");
 
 // Help Icon
 const help_icon = document.querySelector(".question-icon");
@@ -427,6 +428,7 @@ function display_income_breakdown() {
   let state_tax = calculate_state_tax(gross_income);
   let federal_tax = calculate_federal_tax(gross_income);
   let hourly_wage = deduce_hourly_wage(gross_income);
+  let monthly_wage = gross_income / 12;
 
   // 4. Display everything
   animateCount(net_income_span, net_income);
@@ -436,6 +438,7 @@ function display_income_breakdown() {
   animateCount(state_tax_span, state_tax);
   animateCount(federal_tax_span, federal_tax);
   animateCount(hourly_wage_span, hourly_wage);
+  animateCount(monthly_wage_span, monthly_wage);
 }
 
 // * Following two functions just help me flip-flop between floats and currency so that the database doesn't accidentally receive a string
@@ -547,7 +550,7 @@ function formatCurrencyInput(inputElement) {
   });
 }
 
-function animateCount(element, endValue, duration = 2400) {
+function animateCount(element, endValue, duration = 3000) {
   let startTime = null;
 
   // Start from current displayed value
