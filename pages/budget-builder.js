@@ -27,6 +27,9 @@ const type_inp = document.querySelector("#type");
 const item_name_inp = document.querySelector("#name");
 const amount_inp = document.querySelector("#amount");
 
+// Amount Input Functionality Display
+formatCurrencyInput(amount_inp);
+
 // Crud Buttons [Update and Delete are made in budget-line generation]
 const button_load_budget = document.querySelector(".load-budget");
 const button_add_item = document.querySelector(".add-item");
@@ -214,6 +217,8 @@ async function insert_rows() {
     new_item.Amount,
   );
 
+  display_income_breakdown();
+
   return data;
 }
 
@@ -234,7 +239,8 @@ async function update_row(row, new_amount) {
     return null;
   }
 
-  pull_user_budget();
+  await pull_user_budget();
+  display_income_breakdown();
 
   return data;
 }
@@ -251,9 +257,11 @@ function enter_edit_mode(e) {
   action_div.innerHTML = "";
 
   const input = document.createElement("input");
-  input.type = "number";
+  input.type = "text";
   input.value = current_amount;
   input.classList.add("edit-input");
+
+  formatCurrencyInput(input);
 
   amount_cell.replaceChildren(input);
 
@@ -267,7 +275,7 @@ function enter_edit_mode(e) {
   action_div.appendChild(submit_button);
 }
 
-// * Deletes a row based on user data and item name.
+// * Deletes a row based on ID.
 async function delete_row(e) {
   const button = e.target;
   const id = button.dataset.id;
@@ -281,6 +289,9 @@ async function delete_row(e) {
   } else {
     row.remove();
   }
+
+  await pull_user_budget();
+  display_income_breakdown();
 }
 
 // * Ensures that Username and Budget name and saved into local storage when process initiates. This will help with queries all throughout.
@@ -418,13 +429,13 @@ function display_income_breakdown() {
   let hourly_wage = deduce_hourly_wage(gross_income);
 
   // 4. Display everything
-  net_income_span.textContent = format_amount(net_income);
-  gross_income_span.textContent = format_amount(gross_income);
-  social_security_span.textContent = format_amount(social_security);
-  medicaid_span.textContent = format_amount(medicaid);
-  state_tax_span.textContent = format_amount(state_tax);
-  federal_tax_span.textContent = format_amount(federal_tax);
-  hourly_wage_span.textContent = format_amount(hourly_wage);
+  animateCount(net_income_span, net_income);
+  animateCount(gross_income_span, gross_income);
+  animateCount(social_security_span, social_security);
+  animateCount(medicaid_span, medicaid);
+  animateCount(state_tax_span, state_tax);
+  animateCount(federal_tax_span, federal_tax);
+  animateCount(hourly_wage_span, hourly_wage);
 }
 
 // * Following two functions just help me flip-flop between floats and currency so that the database doesn't accidentally receive a string
@@ -438,6 +449,133 @@ function format_amount(value_amount) {
 
 function stringMoney_to_float(amount) {
   return parseFloat(amount.replace(/[^0-9.-]+/g, ""));
+}
+
+function formatCurrencyInput(inputElement) {
+  if (!inputElement) return;
+
+  inputElement.addEventListener("input", (e) => {
+    const el = e.target;
+
+    let selectionStart = el.selectionStart;
+    let value = el.value;
+
+    // Count digits before cursor
+    const digitsBeforeCursor = value
+      .slice(0, selectionStart)
+      .replace(/[^\d]/g, "").length;
+
+    // Detect if cursor is after decimal
+    const cursorAfterDecimal = value.slice(0, selectionStart).includes(".");
+
+    // Clean input
+    let raw = value.replace(/[^\d.]/g, "");
+    const parts = raw.split(".");
+
+    let integerPart = parts[0] || "";
+    let decimalPart = parts[1] || "";
+
+    // Limit decimals
+    if (decimalPart.length > 2) {
+      decimalPart = decimalPart.slice(0, 2);
+    }
+
+    // Format integer
+    let formattedInt = integerPart
+      ? new Intl.NumberFormat("en-US").format(parseInt(integerPart, 10))
+      : "";
+
+    // Build final value
+    let finalValue = "$" + formattedInt;
+
+    if (raw.includes(".")) {
+      finalValue += "." + decimalPart;
+    }
+
+    el.value = finalValue;
+
+    // Restore cursor
+    let newCursorPos = finalValue.length;
+
+    if (cursorAfterDecimal) {
+      const decimalIndex = finalValue.indexOf(".");
+      if (decimalIndex !== -1) {
+        const digitsAfterDecimal = value
+          .slice(value.indexOf(".") + 1, selectionStart)
+          .replace(/[^\d]/g, "").length;
+
+        newCursorPos = decimalIndex + 1 + digitsAfterDecimal;
+      }
+    } else {
+      let digitCount = 0;
+
+      for (let i = 0; i < finalValue.length; i++) {
+        if (/\d/.test(finalValue[i])) {
+          digitCount++;
+        }
+        if (digitCount >= digitsBeforeCursor) {
+          newCursorPos = i + 1;
+          break;
+        }
+      }
+    }
+
+    el.setSelectionRange(newCursorPos, newCursorPos);
+  });
+
+  // Optional: clean formatting on blur
+  inputElement.addEventListener("blur", () => {
+    let raw = inputElement.value.replace(/[^\d.]/g, "");
+    let number = parseFloat(raw);
+
+    if (!isNaN(number)) {
+      inputElement.value = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }).format(number);
+    }
+  });
+
+  // Optional: prevent cursor before $
+  inputElement.addEventListener("keydown", (e) => {
+    if (inputElement.selectionStart === 0) {
+      e.preventDefault();
+      inputElement.setSelectionRange(1, 1);
+    }
+  });
+}
+
+function animateCount(element, endValue, duration = 2400) {
+  let startTime = null;
+
+  // Start from current displayed value
+  const startValue =
+    parseFloat(element.textContent.replace(/[^0-9.-]+/g, "")) || 0;
+
+  function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function step(currentTime) {
+    if (!startTime) startTime = currentTime;
+
+    const progress = Math.min((currentTime - startTime) / duration, 1);
+    const eased = easeOutCubic(progress);
+
+    const currentValue = startValue + (endValue - startValue) * eased;
+
+    element.textContent = format_amount(currentValue);
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      element.textContent = format_amount(endValue);
+    }
+  }
+
+  requestAnimationFrame(step);
 }
 
 // Event Listeners
