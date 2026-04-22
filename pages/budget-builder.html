@@ -97,37 +97,92 @@
         <h2>
           Displaying Budget (Monthly): [<span class="budget-name"></span>]
         </h2>
-
-        <h3>Expenses: [<span id="expenses-total"></span>]</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody id="expenses-category"></tbody>
-        </table>
-        <h3>Budgets: [<span id="budgets-total"></span>]</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody id="budgets-category"></tbody>
-        </table>
-        <h3>Savings: [<span id="savings-total"></span>]</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody id="savings-category"></tbody>
-        </table>
+        <section id="expenses-section">
+          <div class="help-tooltip-specific hidden" id="expenses-tooltip">
+            <h3>Expenses</h3>
+            <br /><br />Think of expenses as solids! They do not change, they
+            either are or are not. <br /><br />For example, you cannot change
+            your rent or mortgage cost (or you would get evicted).<br /><br />Put
+            Items like: Rent, Insurance, Utilities, Subscriptions... Things that
+            are consistently the same total!
+          </div>
+          <h3>
+            Expenses: [<span id="expenses-total"></span>]
+            <img
+              id="expenses-help"
+              class="help-icon"
+              src="icons/question-icon.svg"
+              alt="Savings Help"
+            />
+          </h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody id="expenses-category"></tbody>
+          </table>
+        </section>
+        <section id="budgets-section">
+          <div class="help-tooltip-specific hidden" id="budgets-tooltip">
+            <h3>Budgets</h3>
+            <br /><br />Think of budgets as liquids! They can change based on
+            our actions and choices. <br /><br />For example, you can look for
+            cheaper groceries, or limit how often you eat out.<br /><br />Put
+            Items like: Groceries, Clothing, Eating out... Things that should be
+            considered but can be changed based on effort.
+          </div>
+          <h3>
+            Budgets: [<span id="budgets-total"></span>]
+            <img
+              id="budgets-help"
+              class="help-icon"
+              src="icons/question-icon.svg"
+              alt="Savings Help"
+            />
+          </h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody id="budgets-category"></tbody>
+          </table>
+        </section>
+        <section id="savings-section">
+          <div class="help-tooltip-specific hidden" id="savings-tooltip">
+            <h3>Savings</h3>
+            <br /><br />Think of savings as air! They are goals that aren't
+            vital to your wellbeing, but are nice to have. <br /><br />For
+            example, you can always put money away in a savings account, but
+            nobody is obligating you to.<br /><br />Put Items like: Investment
+            Contributions, Retirement Contributions, Emergency Fund
+            Contributions... or even a new car fund. These are goals of yours
+            that take last priority.
+          </div>
+          <h3>
+            Savings: [<span id="savings-total"></span>]
+            <img
+              id="savings-help"
+              class="help-icon"
+              src="icons/question-icon.svg"
+              alt="Savings Help"
+            />
+          </h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody id="savings-category"></tbody>
+          </table>
+        </section>
         <h2>
           Income Calculator (Annual)
           <button id="income-breakdown">Calculate Income Breakdown</button>
@@ -142,7 +197,7 @@
           <br />
           <p>
             Hourly Wage Needed: [<span class="hourly-wage"></span>]<em>
-              (Assuming 40-hour work week)</em
+              @ 40 hours per week</em
             >
           </p>
           <p>Gross Monthly Salary Needed: [<span id="monthly-wage"></span>]</p>

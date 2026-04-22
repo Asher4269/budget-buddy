@@ -56,6 +56,36 @@ help_icon.addEventListener("mouseleave", () => {
   tool_tip.classList.add("hidden");
 });
 
+// Specific Help Icons
+const expenses_help_icon = document.querySelector("#expenses-help");
+const budgets_help_icon = document.querySelector("#budgets-help");
+const savings_help_icon = document.querySelector("#savings-help");
+
+const expenses_tool_tip = document.querySelector("#expenses-tooltip");
+const budgets_tool_tip = document.querySelector("#budgets-tooltip");
+const savings_tool_tip = document.querySelector("#savings-tooltip");
+
+expenses_help_icon.addEventListener("mouseenter", () => {
+  expenses_tool_tip.classList.toggle("hidden");
+});
+expenses_help_icon.addEventListener("mouseleave", () => {
+  expenses_tool_tip.classList.add("hidden");
+});
+
+budgets_help_icon.addEventListener("mouseenter", () => {
+  budgets_tool_tip.classList.toggle("hidden");
+});
+budgets_help_icon.addEventListener("mouseleave", () => {
+  budgets_tool_tip.classList.add("hidden");
+});
+
+savings_help_icon.addEventListener("mouseenter", () => {
+  savings_tool_tip.classList.toggle("hidden");
+});
+savings_help_icon.addEventListener("mouseleave", () => {
+  savings_tool_tip.classList.add("hidden");
+});
+
 // Database Table Name
 let table_name = "Budget-Line-Items";
 

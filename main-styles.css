@@ -129,9 +129,8 @@ h3 {
 
 a {
   text-decoration: none;
-  color: var(--complement-secondary);
-  border: solid 2px var(--complement-secondary);
-  border-radius: 4px;
+  color: var(--primary-color);
+  border-radius: 12px;
   padding: 1% 2%;
   font-size: var(--small-font);
 }
