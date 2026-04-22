@@ -195,7 +195,7 @@ async function insert_rows() {
         Budget_Name: budget_name_inp.value,
         Type: type_inp.value,
         Item_Name: item_name_inp.value,
-        Amount: amount_inp.value,
+        Amount: stringMoney_to_float(amount_inp.value),
       },
     ])
     .select();
