@@ -303,8 +303,6 @@ function save_user_info() {
 
 // * Retrieves user info from local storage.
 function get_user_info() {
-  save_user_info();
-
   let saved_user_name = localStorage.getItem("user_name");
   let saved_budget_name = localStorage.getItem("budget_name");
 
@@ -582,6 +580,15 @@ function animateCount(element, endValue, duration = 3000) {
 }
 
 // Event Listeners
+
 button_add_item.addEventListener("click", insert_rows);
 button_load_budget.addEventListener("click", pull_user_budget);
 button_display_breakdown.addEventListener("click", display_income_breakdown);
+
+user_name_inp.addEventListener("input", save_user_info);
+budget_name_inp.addEventListener("input", save_user_info);
+
+// Pulls User's info from their local storage so that they start right back where they left off
+document.addEventListener("DOMContentLoaded", () => {
+  get_user_info();
+});
