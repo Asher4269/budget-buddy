@@ -591,4 +591,5 @@ budget_name_inp.addEventListener("input", save_user_info);
 // Pulls User's info from their local storage so that they start right back where they left off
 document.addEventListener("DOMContentLoaded", () => {
   get_user_info();
+  pull_user_budget();
 });
