@@ -13,6 +13,8 @@ const mortgage_interest_rate_input = document.querySelector(
 );
 const mortgage_length_input = document.querySelector("#mortgage-length-years");
 
+formatCurrencyInput(mortgage_home_value_input);
+formatCurrencyInput(mortgage_down_payment_input);
 // Mortgage Calculate Button
 const mortgage_calc_button = document.querySelector("#mortgage-button");
 
@@ -37,6 +39,8 @@ const auto_down_payment_input = document.querySelector("#auto-down-payment");
 const auto_interest_rate_input = document.querySelector("#auto-interest-rate");
 const auto_length_input = document.querySelector("#auto-length-years");
 
+formatCurrencyInput(auto_value_input);
+formatCurrencyInput(auto_down_payment_input);
 // Auto Calculate Button
 const auto_calc_button = document.querySelector("#auto-button");
 
@@ -64,6 +68,9 @@ const investment_interest_rate_input = document.querySelector(
 const investment_length_input = document.querySelector(
   "#investment-length-years",
 );
+
+formatCurrencyInput(investment_initial_input);
+formatCurrencyInput(investment_monthly_input);
 
 // Investment Calculate Button
 const investment_calc_button = document.querySelector("#investment-button");
@@ -208,6 +215,109 @@ function format_amount(value_amount) {
 
 function stringMoney_to_float(amount) {
   return parseFloat(amount.replace(/[^0-9.-]+/g, ""));
+}
+
+function formatCurrencyInput(inputElement) {
+  if (!inputElement) return;
+
+  inputElement.addEventListener("input", (e) => {
+    const el = e.target;
+    let value = el.value;
+
+    // Allow empty input
+    if (value.trim() === "") {
+      el.value = "";
+      return;
+    }
+
+    let selectionStart = el.selectionStart;
+
+    // Count digits before cursor
+    const digitsBeforeCursor = value
+      .slice(0, selectionStart)
+      .replace(/[^\d]/g, "").length;
+
+    // Detect if cursor is after decimal
+    const cursorAfterDecimal = value.slice(0, selectionStart).includes(".");
+
+    // Clean input
+    let raw = value.replace(/[^\d.]/g, "");
+    const parts = raw.split(".");
+
+    let integerPart = parts[0] || "";
+    let decimalPart = parts[1] || "";
+
+    // Limit decimals to 2
+    if (decimalPart.length > 2) {
+      decimalPart = decimalPart.slice(0, 2);
+    }
+
+    // Format integer
+    let formattedInt = integerPart
+      ? new Intl.NumberFormat("en-US").format(parseInt(integerPart, 10))
+      : "";
+
+    // Build final value
+    let finalValue = formattedInt ? "$" + formattedInt : "";
+
+    if (raw.includes(".")) {
+      finalValue += "." + decimalPart;
+    }
+
+    el.value = finalValue;
+
+    // Restore cursor position
+    let newCursorPos = finalValue.length;
+
+    if (cursorAfterDecimal) {
+      const decimalIndex = finalValue.indexOf(".");
+      if (decimalIndex !== -1) {
+        const digitsAfterDecimal = value
+          .slice(value.indexOf(".") + 1, selectionStart)
+          .replace(/[^\d]/g, "").length;
+
+        newCursorPos = decimalIndex + 1 + digitsAfterDecimal;
+      }
+    } else {
+      let digitCount = 0;
+
+      for (let i = 0; i < finalValue.length; i++) {
+        if (/\d/.test(finalValue[i])) digitCount++;
+        if (digitCount >= digitsBeforeCursor) {
+          newCursorPos = i + 1;
+          break;
+        }
+      }
+    }
+
+    el.setSelectionRange(newCursorPos, newCursorPos);
+  });
+
+  // Format nicely on blur
+  inputElement.addEventListener("blur", () => {
+    let raw = inputElement.value.replace(/[^\d.]/g, "");
+    let number = parseFloat(raw);
+
+    if (!isNaN(number)) {
+      inputElement.value = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }).format(number);
+    }
+  });
+
+  // Gently keep cursor after "$"
+  inputElement.addEventListener("focus", () => {
+    if (inputElement.value.startsWith("$")) {
+      setTimeout(() => {
+        if (inputElement.selectionStart === 0) {
+          inputElement.setSelectionRange(1, 1);
+        }
+      }, 0);
+    }
+  });
 }
 
 // * Event Listeners
