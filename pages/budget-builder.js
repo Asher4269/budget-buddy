@@ -487,9 +487,15 @@ function formatCurrencyInput(inputElement) {
 
   inputElement.addEventListener("input", (e) => {
     const el = e.target;
+    let value = el.value;
+
+    // Allow empty input
+    if (value.trim() === "") {
+      el.value = "";
+      return;
+    }
 
     let selectionStart = el.selectionStart;
-    let value = el.value;
 
     // Count digits before cursor
     const digitsBeforeCursor = value
@@ -506,7 +512,7 @@ function formatCurrencyInput(inputElement) {
     let integerPart = parts[0] || "";
     let decimalPart = parts[1] || "";
 
-    // Limit decimals
+    // Limit decimals to 2
     if (decimalPart.length > 2) {
       decimalPart = decimalPart.slice(0, 2);
     }
@@ -517,7 +523,7 @@ function formatCurrencyInput(inputElement) {
       : "";
 
     // Build final value
-    let finalValue = "$" + formattedInt;
+    let finalValue = formattedInt ? "$" + formattedInt : "";
 
     if (raw.includes(".")) {
       finalValue += "." + decimalPart;
@@ -525,7 +531,7 @@ function formatCurrencyInput(inputElement) {
 
     el.value = finalValue;
 
-    // Restore cursor
+    // Restore cursor position
     let newCursorPos = finalValue.length;
 
     if (cursorAfterDecimal) {
@@ -541,9 +547,7 @@ function formatCurrencyInput(inputElement) {
       let digitCount = 0;
 
       for (let i = 0; i < finalValue.length; i++) {
-        if (/\d/.test(finalValue[i])) {
-          digitCount++;
-        }
+        if (/\d/.test(finalValue[i])) digitCount++;
         if (digitCount >= digitsBeforeCursor) {
           newCursorPos = i + 1;
           break;
@@ -554,7 +558,7 @@ function formatCurrencyInput(inputElement) {
     el.setSelectionRange(newCursorPos, newCursorPos);
   });
 
-  // Optional: clean formatting on blur
+  // Format nicely on blur
   inputElement.addEventListener("blur", () => {
     let raw = inputElement.value.replace(/[^\d.]/g, "");
     let number = parseFloat(raw);
@@ -569,11 +573,14 @@ function formatCurrencyInput(inputElement) {
     }
   });
 
-  // Optional: prevent cursor before $
-  inputElement.addEventListener("keydown", (e) => {
-    if (inputElement.selectionStart === 0) {
-      e.preventDefault();
-      inputElement.setSelectionRange(1, 1);
+  // Gently keep cursor after "$"
+  inputElement.addEventListener("focus", () => {
+    if (inputElement.value.startsWith("$")) {
+      setTimeout(() => {
+        if (inputElement.selectionStart === 0) {
+          inputElement.setSelectionRange(1, 1);
+        }
+      }, 0);
     }
   });
 }
